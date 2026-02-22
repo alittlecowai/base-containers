@@ -1,7 +1,5 @@
 # Base Containers
-This repository serves as a base for custom-made container images used in AI-powered applications.
-
-[In Progress]: A CICD pipeline to build the various images and push into Github container registry.
+This repository serves as a base for custom-made container images used in AI-powered applications. There is a CICD pipeline that builds the various images and push into Github container registry.
 
 ## Containers List
 
