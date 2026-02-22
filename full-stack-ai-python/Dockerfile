@@ -9,7 +9,10 @@ RUN adduser -u 49999 nonroot -G nonroot -D -s /bin/sh
 
 # Install required packages
 # gcc needed for pandas
-RUN apk update && apk add uv gcc bash expat git curl libcurl-openssl4 wget openssh openssh-keyscan jq zip tzdata uuidgen gpg gpg-agent --no-cache
+RUN apk update && apk add uv gcc bash expat git curl libcurl-openssl4 wget openssh openssh-keyscan jq zip tzdata uuidgen gpg gpg-agent python-3.12 py3-pip --no-cache
+
+# Install uv
+RUN pip install uv
 
 # Set timezone
 SHELL ["/bin/bash", "-c"]
@@ -33,6 +36,9 @@ RUN rm -rf /etc/ssh
 # Set work directory
 USER nonroot
 WORKDIR /usr/src/app
+
+# Prevent uv from downloading standalone python
+ENV UV_PYTHON_INSTALL=0
 
 # Install requirements via uv
 ENV UV_COMPILE_BYTECODE=1
