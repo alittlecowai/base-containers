@@ -1,0 +1,40 @@
+name: Build Multiple Images
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service: [full-stack-ai-python, postgres]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate datetime tag
+        id: tag
+        run: |
+          TAG=$(date -u +"%Y%m%d%H%M")
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.service }}
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/${{ matrix.service }}:${{ steps.tag.outputs.tag }}
