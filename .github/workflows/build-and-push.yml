@@ -38,5 +38,5 @@ jobs:
           context: ./${{ matrix.service }}
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/my-image:${{ steps.tag.outputs.tag }}
-            ghcr.io/${{ github.repository_owner }}/my-image:latest
+            ghcr.io/${{ github.repository_owner }}/${{ matrix.service }}:${{ steps.tag.outputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/${{ matrix.service }}:latest
