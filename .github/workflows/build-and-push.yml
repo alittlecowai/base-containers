@@ -2,7 +2,7 @@ name: Build Multiple Images
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,7 +14,13 @@ jobs:
 
     strategy:
       matrix:
-        service: [full-stack-ai-python, postgres]
+        service:
+          [
+            full-stack-ai-python,
+            full-stack-ai-python-nosql,
+            postgres,
+            mongo-search,
+          ]
 
     steps:
       - uses: actions/checkout@v4
