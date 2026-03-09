@@ -9,8 +9,11 @@ For AI applications that expose a backend API via REST or websockets
 ### Full Stack AI Python
 For AI applications that use SQL database as well as Python to serve frontend webpages and backend APIs
 
-### Full Stack AI Python (NoSQL) [In Progress]
+### Full Stack AI Python (NoSQL)
 For AI applications that use NoSQL database as well as Python to serve frontend webpages and backend APIs
+
+### Mongo Search
+Containers for Mongo NoSQL database
 
 ### Postgres
 Containers for Postgres SQL database
