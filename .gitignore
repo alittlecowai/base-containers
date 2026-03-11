@@ -2,3 +2,5 @@
 .toml
 .lock
 */cplex
+*.crt
+*.key
