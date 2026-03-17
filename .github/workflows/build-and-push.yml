@@ -33,7 +33,7 @@ jobs:
         run: |
           TAG=$(date -u +"%Y%m%d%H%M")
           if [ "${{ matrix.service }}" = "cloudnative-postgres" ]; then
-            TAG = "tag=18-barman-$TAG"
+            TAG="18-barman-$TAG"
           fi
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
