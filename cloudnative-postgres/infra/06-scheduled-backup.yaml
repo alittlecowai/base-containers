@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: app-db-v18-test-now
+  namespace: database-test
+spec:
+  schedule: "0 0 2 * * *"
+  immediate: true
+  cluster:
+    name: app-db-v18-test

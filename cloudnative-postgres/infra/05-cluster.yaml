@@ -1,0 +1,53 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: app-db-v18-test
+  namespace: database-test
+spec:
+  instances: 1
+
+  imageName: cloudnative-postgres:18-barman
+  imagePullPolicy: Never
+
+  storage:
+    size: 5Gi
+
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "512Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
+
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: app-db-app
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "128MB"
+      wal_level: "replica"
+      logging_collector: "on"
+      log_destination: "csvlog"
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://cnpg-test/app-db-v18-test
+      endpointURL: http://minio.database-test.svc.cluster.local:9000
+      serverName: app-db-v18-test
+      s3Credentials:
+        accessKeyId:
+          name: minio-root-creds
+          key: MINIO_ROOT_USER
+        secretAccessKey:
+          name: minio-root-creds
+          key: MINIO_ROOT_PASSWORD
+      wal:
+        compression: gzip
+      data:
+        compression: gzip

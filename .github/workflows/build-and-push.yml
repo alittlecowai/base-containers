@@ -22,15 +22,20 @@ jobs:
             mongo-search,
             python-cplex,
             node-no-certs,
+            cloudnative-postgres,
           ]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate datetime tag
+      - name: Set tag
         id: tag
         run: |
-          TAG=$(date -u +"%Y%m%d%H%M")
+          if [ "${{ matrix.service }}" = "cloudnative-postgres" ]; then
+            TAG="18-barman"
+          else
+            TAG=$(date -u +"%Y%m%d%H%M")
+          fi
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Login to GHCR
