@@ -3,9 +3,6 @@ This repository serves as a base for custom-made container images used in AI-pow
 
 ## Containers List
 
-### Backend AI Python [In Progress]
-For AI applications that expose a backend API via REST or websockets
-
 ### Full Stack AI Python
 For AI applications that use SQL database as well as Python to serve frontend webpages and backend APIs
 
