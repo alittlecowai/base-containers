@@ -1,41 +1,23 @@
-# Use wolfi-base to prevent CVEs as much as possible
-FROM cgr.dev/chainguard/wolfi-base
+# BASE STAGE
+FROM ghcr.io/astral-sh/uv:latest AS uv_bin
 
-# Recreate nonroot user with fixed UID/GID
-RUN deluser nonroot
-RUN delgroup nogroup
-RUN addgroup -g 49999 nonroot
-RUN adduser -u 49999 nonroot -G nonroot -D -s /bin/sh
+# BUILDER STAGE
+FROM cgr.dev/chainguard/wolfi-base AS builder
 
-# Install required packages
-# gcc needed for pandas
-RUN apk update && apk add uv gcc bash expat git curl libcurl-openssl4 wget openssh openssh-keyscan jq zip tzdata uuidgen gpg gpg-agent python-3.12 py3-pip --no-cache
+# Install apk packages
+RUN apk add --no-cache \
+    python-3.12-dev \
+    gcc
 
-# Install uv
-RUN pip install uv
+# Install uv and make uv available in PATH
+COPY --from=uv_bin /uv /uvx /bin/
 
-# Set timezone
-SHELL ["/bin/bash", "-c"]
-RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
-ENV TZ=Asia/Singapore
+# Set working directory
+WORKDIR /usr/src/app
 
 # Copy relevant application files
 COPY pyproject.toml /usr/src/app/pyproject.toml
 COPY uv.lock /usr/src/app/uv.lock
-
-# Set permissions
-RUN chown -R nonroot:nonroot /usr/src/app
-RUN chown -R nonroot:nonroot /home/nonroot
-
-# Final hardening to prevent privilege escalation before switching to non-root user
-RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-
-# Remove sensitive files
-RUN rm -rf /etc/ssh
-
-# Set work directory
-USER nonroot
-WORKDIR /usr/src/app
 
 # Prevent uv from downloading standalone python
 ENV UV_PYTHON_INSTALL=0
@@ -47,7 +29,40 @@ RUN uv sync --no-dev --locked
 # Remove uv cache, prevent unused package vulnerabilities from appearing in container scan
 RUN uv cache clean
 
-# Set Python environment variables
+# RUNTIME STAGE
+FROM cgr.dev/chainguard/wolfi-base AS runtime
+
+# Install apk packages
+RUN apk add --no-cache \
+    python-3.12 \
+    tzdata
+
+# Recreate nonroot user with fixed UID/GID
+RUN deluser nonroot
+RUN delgroup nogroup
+RUN addgroup -g 49999 nonroot
+RUN adduser -u 49999 nonroot -G nonroot -D -s /bin/sh
+
+# Set timezone
+ENV TZ=Asia/Singapore
+RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+
+# Set permissions
+WORKDIR /usr/src/app
+RUN chown -R nonroot:nonroot /usr/src/app
+RUN chown -R nonroot:nonroot /home/nonroot
+
+# Final hardening to prevent privilege escalation before switching to non-root user
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+
+# Remove sensitive files
+RUN rm -rf /etc/ssh
+
+# Set working directory
+USER nonroot
+
+COPY --from=builder /usr/src/app/.venv .venv
+
 ENV PATH="/usr/src/app/.venv/bin:$PATH" \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
