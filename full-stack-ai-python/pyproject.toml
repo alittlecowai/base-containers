@@ -24,8 +24,8 @@ dependencies = [
     "pydantic==2.11.7",
     "pymysql==1.1.1",
     "python3-saml==1.16.0",
-    "python-dotenv==1.1.1",
-    "python-multipart==0.0.22",
+    "python-dotenv==1.2.2",
+    "python-multipart==0.0.26",
     "pyyaml==6.0.2",
     "requests==2.33.1",
     "setuptools==80.10.2",
@@ -40,6 +40,7 @@ dependencies = [
     "urllib3==2.6.3",
     "uvicorn==0.35.0",
     "uvicorn-worker==0.3.0",
+    "lxml==6.1.0",
 ]
 
 [dependency-groups]
