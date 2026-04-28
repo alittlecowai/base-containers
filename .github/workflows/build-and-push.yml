@@ -23,7 +23,8 @@ jobs:
             python-cplex,
             node-no-certs,
             cloudnative-postgres,
-            rabbitmq
+            rabbitmq,
+            frontend-python
           ]
 
     steps:
