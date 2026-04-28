@@ -1,0 +1,16 @@
+[project]
+name = "frontend-python"
+version = "0.1.0"
+description = "Packages used in a frontend AI python app"
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "fastapi==0.121.1",
+    "itsdangerous==2.2.0",
+    "python-dotenv==1.2.2",
+    "uvicorn==0.35.0",
+    "uvicorn-worker==0.3.0",
+]
+
+[tool.uv]
+python-downloads = "never"
