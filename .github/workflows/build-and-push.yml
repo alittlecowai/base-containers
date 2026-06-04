@@ -48,14 +48,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare inference uv.lock
-        if: matrix.service == 'backend-ai-python-inference'
-        run: bash ./backend-ai-python-inference/build_inference_uv_env.sh
-
-      - name: Prepare training uv.lock
-        if: matrix.service == 'backend-ai-python-training'
-        run: bash ./backend-ai-python-training/build_training_uv_env.sh
-
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
