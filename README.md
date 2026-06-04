@@ -3,6 +3,9 @@ This repository serves as a base for custom-made container images used in AI-pow
 
 ## Containers List
 
+### Backend AI Python
+For AI applications that require training and inference processes
+
 ### Full Stack AI Python
 For AI applications that use SQL database as well as Python to serve frontend webpages and backend APIs
 
@@ -10,7 +13,19 @@ For AI applications that use SQL database as well as Python to serve frontend we
 For AI applications that use NoSQL database as well as Python to serve frontend webpages and backend APIs
 
 ### Mongo Search
-Containers for Mongo NoSQL database
+Container for Mongo NoSQL database
 
 ### Postgres
-Containers for Postgres SQL database
+Container for Postgres SQL database
+
+### Cloud Native Postgres (CNPG)
+Container for CNPG SQL database
+
+### Node 
+Container for frontend JavaScript applications that uses a node-js server
+
+### frotnend-python 
+Container for frontend JavaScript applications that uses a Python FastAPI server
+
+### Python cplex
+Container fwith python requirements to serve a cplex application (cplex itself is not included)

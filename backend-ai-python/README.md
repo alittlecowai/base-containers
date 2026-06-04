@@ -1,0 +1,1 @@
+This serves as the common base for `backend-ai-python-inference` and `backend-ai-python-training`. 
