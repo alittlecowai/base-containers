@@ -9,4 +9,4 @@ cp "$BASE_DIR/pyproject.toml" "$SCRIPT_DIR/pyproject.toml"
 cd "$SCRIPT_DIR"
 
 # Generate uv.lock for training-only image (core + training group), using the existing pyproject.
-uv sync --no-dev --only-group training
+uv sync --no-default-groups --group training

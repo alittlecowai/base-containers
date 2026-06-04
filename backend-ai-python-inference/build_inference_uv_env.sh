@@ -9,4 +9,4 @@ cp "$BASE_DIR/pyproject.toml" "$SCRIPT_DIR/pyproject.toml"
 cd "$SCRIPT_DIR"
 
 # Generate uv.lock for inference-only image (core + inference group), using the existing pyproject.
-uv sync --no-dev --only-group inference
+uv sync --no-default-groups --group inference

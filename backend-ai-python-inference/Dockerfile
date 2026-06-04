@@ -24,7 +24,7 @@ ENV UV_PYTHON_INSTALL=0
 
 # Install requirements via uv
 ENV UV_COMPILE_BYTECODE=1
-RUN uv sync --no-dev --locked --only-group inference
+RUN uv sync --no-default-groups --locked --group inference
 
 # Remove uv cache, prevent unused package vulnerabilities from appearing in container scan
 RUN uv cache clean
