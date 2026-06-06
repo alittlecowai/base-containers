@@ -29,7 +29,7 @@ dev = [
 ]
 training = [
     "matplotlib==3.10.8",
-    "mlflow[auth]==3.11.1", # TODO: To confirm if dspy models can be loaded without mlflow
+    "mlflow[auth]==3.13.0", # TODO: To confirm if dspy models can be loaded without mlflow
     "seaborn==0.13.2",
     "optuna==4.8.0"
 ]
