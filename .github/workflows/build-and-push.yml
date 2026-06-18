@@ -16,6 +16,7 @@ jobs:
       matrix:
         service:
           [
+            backend-ai-python-ui,
             backend-ai-python-training,
             backend-ai-python-inference,
             full-stack-ai-python,
