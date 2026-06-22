@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.12.3"
 dependencies = [
     "cplex>=22.1.0.0",
-    "cryptography>=46.0.3",
+    "cryptography>=48.0.1",
     "docplex>=2.30.251",
     "flask==3.1.3",
     "flask-cors>6.0.0",
@@ -17,12 +17,14 @@ dependencies = [
     "pandas>1.3.5",
     "psycopg2-binary>=2.9.11",
     "pydantic>=2.11.10",
-    "pyjwt>=2.10.1",
+    "pyjwt>=2.13.0",
     "python3-saml>=1.16.0",
-    "requests>=2.32.4",
+    "lxml==6.1.0",
+    "requests>=2.33.0",
     "sqlalchemy==2.0.9",
-    "urllib3>=2.6.0", # Required for `requests`
+    "urllib3>=2.7.0", # Required for `requests`
     "xlsxwriter==3.2.0",
+    "idna == 3.15",
 ]
  
 [dependency-groups]
