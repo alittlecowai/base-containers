@@ -2,10 +2,12 @@ FROM cgr.dev/chainguard/node:latest-dev AS certbuilder
 
 USER root
 RUN apk add --no-cache ca-certificates
+RUN apk update && apk upgrade --no-cache
 
 FROM cgr.dev/chainguard/node:latest
 
 USER root
+RUN apk update && apk upgrade --no-cache
 
 COPY --from=certbuilder /usr/bin/c_rehash /usr/bin/c_rehash
 COPY --from=certbuilder /usr/sbin/update-ca-certificates /usr/sbin/
@@ -24,7 +26,5 @@ RUN mkdir -p \
     /usr/share/ca-certificates \
     #     /usr/local/share/ca-certificates \
     && touch /etc/ssl/certs/ca-certificates.crt
-
-USER 65532:65532
 
 USER 65532:65532
