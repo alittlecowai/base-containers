@@ -7,7 +7,6 @@ RUN apk update && apk upgrade --no-cache
 FROM cgr.dev/chainguard/node:latest
 
 USER root
-RUN apk update && apk upgrade --no-cache
 
 COPY --from=certbuilder /usr/bin/c_rehash /usr/bin/c_rehash
 COPY --from=certbuilder /usr/sbin/update-ca-certificates /usr/sbin/
