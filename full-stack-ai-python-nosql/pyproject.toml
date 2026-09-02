@@ -49,10 +49,5 @@ override-dependencies = []
 [dependency-groups]
 dev = ["pytest==9.0.3", "pytest-asyncio>=1.3.0"]
 
-# set UV_DEFAULT_INDEX on your computer instead
-# [[tool.uv.index]]
-# url = "https://nexus.ngine.htd.gov.sg/repository/public-pypi-pxy/simple"
-# default = true
-
 [tool.pytest.ini_options]
 addopts = "--import-mode=importlib"
