@@ -18,11 +18,16 @@ dependencies = [
     "pydantic==2.12.5",
     "python-dotenv==1.0.1",
     "pyyaml==6.0.3",
+    "pycld2==0.42",
+    "lingua-language-detector>=2.0.0",
+    "torch==2.11.0",
     "scikit-learn==1.8.0",
     "torch==2.11.0",
     "transformers==5.6.2",
     "google-re2>=1.1.20251105",
     "s3fs==2026.7.0",
+    "xgboost==3.0.2",
+    "lightgbm==4.6.0",
 ]
 
 [dependency-groups]
@@ -32,12 +37,14 @@ dev = [
     "pytest==9.0.3",
     "pre-commit>=4.6.0",
     "pytest-cov>=7.1.0",
+    "xlsxwriter>=3.2.0",
+    "openpyxl==3.1.5"
 ]
 training = [
     "matplotlib==3.10.8",
     "mlflow[auth]==3.13.0", # TODO: To confirm if dspy models can be loaded without mlflow
     "seaborn==0.13.2",
-    "optuna==4.8.0"
+    "optuna==4.8.0",
 ]
 inference = [
     "celery==5.6.3",
@@ -45,6 +52,9 @@ inference = [
 
 [tool.uv]
 default-groups = ["dev", "training", "inference"]
+override-dependencies = [
+    "nvidia-nccl-cu12; python_version == '99.0'",
+]
 
 [tool.uv.sources]
 torch = [
