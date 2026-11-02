@@ -35,7 +35,8 @@ FROM cgr.dev/chainguard/wolfi-base AS runtime
 # Install apk packages
 RUN apk add --no-cache \
     python-3.13 \
-    tzdata
+    tzdata \
+    libgomp1
 
 # Recreate nonroot user with fixed UID/GID
 RUN deluser nonroot
